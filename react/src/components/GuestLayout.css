@@ -1,0 +1,22 @@
+.guest-container {
+    margin-top: 20vh;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 0.7em;
+    display: block;
+    width: 100%;
+}
+
+.form-button {
+    margin-top: 1.2em;
+}
+
+.guest-link {
+    text-decoration: none;
+}
+
+.guest-link:hover {
+    text-decoration: none;
+}
