@@ -9,6 +9,10 @@
     width: 100%;
 }
 
+.email-field {
+    margin-top: 0;
+}
+
 .form-button {
     margin-top: 1.2em;
 }

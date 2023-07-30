@@ -1,0 +1,22 @@
+.alerts-container {
+    position: fixed;
+    top: 0;
+    /* right: 0; */
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-end; */
+    align-items: center;
+    z-index: 1000; /* Adjust this value to bring the alerts closer to the user */
+}
+
+.toast {
+    margin: 0.5em 0;
+    box-shadow: 0 0 7px grey;
+
+    .message {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}

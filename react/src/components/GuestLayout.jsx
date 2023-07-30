@@ -6,6 +6,7 @@ import './GuestLayout.css'
 
 export default function GuestLayout() {
     const { token } = useAuth()
+
     if (token) {
         return <Navigate to={'/'} />
     }

@@ -11,9 +11,10 @@ const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({})
     // const [user, setUser] = useState('Jean')
-    // const [token, _setToken] = useState(localStorage.getItem('ACCESS_TOKEN'))
+
+    const [token, _setToken] = useState(localStorage.getItem('ACCESS_TOKEN'))
     // const [token, _setToken] = useState(123)
-    const [token, _setToken] = useState(null)
+    // const [token, _setToken] = useState(null)
 
     const setToken = (token) => {
         _setToken(token)
