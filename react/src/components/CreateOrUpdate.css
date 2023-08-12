@@ -1,0 +1,17 @@
+/* .create-update-modal {
+}
+
+.title-description-column {
+    flex: 0 0 2em;
+    padding-right: 1em;
+}
+
+.content-column {
+    flex: 1;
+    padding-left: 1em;
+} */
+
+.modal-create-update-button {
+    float: right;
+    margin-bottom: 1em;
+}

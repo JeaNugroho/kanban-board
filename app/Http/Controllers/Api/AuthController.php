@@ -58,7 +58,11 @@ class AuthController extends Controller
         // $doneColumn->save();
 
 
-        $token = $user->createToken('main')->plainTextToken;
+        $tokenObj = $user->createToken('main', ['server:update']);
+        $tokenObj->accessToken->expires_at = now()->addMinutes(270);
+        $tokenObj->accessToken->save();
+
+        $token = $tokenObj->plainTextToken;
 
         return response(compact('user', 'token'));
     }
@@ -73,8 +77,13 @@ class AuthController extends Controller
 
         /** @var User $user */
         $user = Auth::user();
-        $expiresAt = now()->addMinutes(1);
-        $token = $user->createToken('main', ['expires_in' => $expiresAt])->plainTextToken;
+        
+        $tokenObj = $user->createToken('main', ['server:update']);
+        $tokenObj->accessToken->expires_at = now()->addMinutes(270);
+        $tokenObj->accessToken->save();
+
+        $token = $tokenObj->plainTextToken;
+
         return response(compact('user', 'token'));
     }
 

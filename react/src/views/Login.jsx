@@ -13,7 +13,7 @@ export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const [isLoading, setIsLoading] = useState(false)
-    const { setUser, setToken } = useAuth()
+    const { setToken } = useAuth()
     const { addAlert } = useToast()
 
     const onSubmit = (event) => {
@@ -28,9 +28,6 @@ export default function Login() {
         axiosClient.post('/login', payload)
             .then(({ data }) => {
                 setIsLoading(false)
-                setUser(data.user)
-                console.log("data.user")
-                console.log(data.user)
                 setToken(data.token)
             })
             .catch(({ response }) => {

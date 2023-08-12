@@ -1,0 +1,38 @@
+.column-card {
+    display: flex;
+    flex-direction: column;
+    /* flex: 1; */
+    height: 92%;
+    min-width: 26em;
+    width: 26em;
+}
+
+.in-progress-card {
+    margin: 0 2em;
+}
+
+.column-header {
+    .button-group {
+        display: flex;
+        flex-direction: row;
+
+        .button {
+            flex: 1;
+        }
+
+        .delete-button {
+            margin-left: 0.5em;
+        }
+    }
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    /* flex: 1; */
+    /* flex-wrap: wrap; */
+    flex-grow: 1;
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BasicSwitchRequest;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\SwitchBetweenColumnsRequest;
 use App\Http\Requests\SwitchInColumnRequest;
@@ -163,43 +164,80 @@ class ItemController extends Controller
         return response()->json(['message' => 'Item deleted successfully'], 200);
     }
 
-    public function switchInColumn(SwitchInColumnRequest $request) {
+    // public function switchInColumn(SwitchInColumnRequest $request) {
+    //     $data = $request->validated();
+    //     // $task = Item::find($data['task_id']);
+    //     $task = Item::where('user_id', auth()->id())->where('id', $data['task_id'])->first();
+    //     if (!$task || $task->column_id !== $data['column_id']) {
+    //         return response()->json(['message' => 'Item not found'], 404);
+    //     }
+
+    //     $startIdx = $data['start_idx'];
+    //     $destinationIdx = $data['destination_idx'];
+    //     // $column = Column::find($data['column_id']);
+    //     $column = Column::where('user_id', auth()->id())->where('id', $data['column_id'])->first();
+    //     if (!$column) {
+    //         return response()->json(['message' => 'Column not found'], 404);
+    //     }
+
+    //     $taskIds = $column->task_ids;
+    //     $taskIdIdx = array_search($data['task_id'], $taskIds);
+    //     if ($taskIdIdx === false || $taskIdIdx !== $startIdx) {
+    //         return response()->json(['message' => 'Item not found'], 404);
+    //     }
+
+    //     $removedTaskId = array_splice($taskIds, $startIdx, 1)[0];
+    //     $taskIds = array_values($taskIds);
+
+    //     array_splice($taskIds, $destinationIdx, 0, $removedTaskId);
+    //     $taskIds = array_values($taskIds);
+
+    //     $column->task_ids = $taskIds;
+    //     $column->save();
+
+    //     return response()->json(['message' => 'Item relocated successfully'], 200);
+    // }
+
+    // public function switchBetweenColumns(SwitchBetweenColumnsRequest $request) {
+    //     $data = $request->validated();
+    //     // $task = Item::find($data['task_id']);
+    //     $task = Item::where('user_id', auth()->id())->where('id', $data['task_id'])->first();
+    //     if (!$task || $task->column_id !== $data['start_column_id']) {
+    //         return response()->json(['message' => 'Item not found'], 404);
+    //     }
+
+    //     $startColumn = Column::where('user_id', auth()->id())->where('id', $data['start_column_id'])->first();
+    //     $destinationColumn = Column::where('user_id', auth()->id())->where('id', $data['destination_column_id'])->first();
+    //     if (!$startColumn || !$destinationColumn) {
+    //         return response()->json(['message' => 'Column not found'], 404);
+    //     }
+    //     $startTaskIds = $startColumn->task_ids;
+    //     $destinationTaskIds = $destinationColumn->task_ids;
+    //     $startRowIdx = $data['start_row_idx'];
+    //     $destinationRowIdx = $data['destination_row_idx'];
+
+    //     $taskIdIdx = array_search($data['task_id'], $startTaskIds);
+    //     if ($taskIdIdx === false || $taskIdIdx !== $startRowIdx) {
+    //         return response()->json(['message' => 'Item not found'], 404);
+    //     }
+
+    //     $removedTaskId = array_splice($startTaskIds, $startRowIdx, 1)[0];
+    //     $startColumn->task_ids = array_values($startTaskIds);
+    //     $startColumn->save();
+
+    //     array_splice($destinationTaskIds, $destinationRowIdx, 0, $removedTaskId);
+    //     $destinationColumn->task_ids = array_values($destinationTaskIds);
+    //     $destinationColumn->save();
+
+    //     $task->column_id = $destinationColumn->id;
+    //     $task->save();
+
+    //     return response()->json(['message' => 'Item relocated successfully'], 200);
+    // }
+
+    public function basicSwitch(BasicSwitchRequest $request) {
         $data = $request->validated();
-        // $task = Item::find($data['task_id']);
-        $task = Item::where('user_id', auth()->id())->where('id', $data['task_id'])->first();
-        if (!$task || $task->column_id !== $data['column_id']) {
-            return response()->json(['message' => 'Item not found'], 404);
-        }
-
-        $startIdx = $data['start_idx'];
-        $destinationIdx = $data['destination_idx'];
-        // $column = Column::find($data['column_id']);
-        $column = Column::where('user_id', auth()->id())->where('id', $data['column_id'])->first();
-        if (!$column) {
-            return response()->json(['message' => 'Column not found'], 404);
-        }
-
-        $taskIds = $column->task_ids;
-        $taskIdIdx = array_search($data['task_id'], $taskIds);
-        if ($taskIdIdx === false || $taskIdIdx !== $startIdx) {
-            return response()->json(['message' => 'Item not found'], 404);
-        }
-
-        $removedTaskId = array_splice($taskIds, $startIdx, 1)[0];
-        $taskIds = array_values($taskIds);
-
-        array_splice($taskIds, $destinationIdx, 0, $removedTaskId);
-        $taskIds = array_values($taskIds);
-
-        $column->task_ids = $taskIds;
-        $column->save();
-
-        return response()->json(['message' => 'Item relocated successfully'], 200);
-    }
-
-    public function switchBetweenColumns(SwitchBetweenColumnsRequest $request) {
-        $data = $request->validated();
-        // $task = Item::find($data['task_id']);
+        
         $task = Item::where('user_id', auth()->id())->where('id', $data['task_id'])->first();
         if (!$task || $task->column_id !== $data['start_column_id']) {
             return response()->json(['message' => 'Item not found'], 404);
@@ -212,20 +250,18 @@ class ItemController extends Controller
         }
         $startTaskIds = $startColumn->task_ids;
         $destinationTaskIds = $destinationColumn->task_ids;
-        $startRowIdx = $data['start_row_idx'];
-        $destinationRowIdx = $data['destination_row_idx'];
 
         $taskIdIdx = array_search($data['task_id'], $startTaskIds);
-        if ($taskIdIdx === false || $taskIdIdx !== $startRowIdx) {
+        if ($taskIdIdx === false) {
             return response()->json(['message' => 'Item not found'], 404);
         }
 
-        $removedTaskId = array_splice($startTaskIds, $startRowIdx, 1)[0];
+        $removedTaskId = array_splice($startTaskIds, $taskIdIdx, 1)[0];
         $startColumn->task_ids = array_values($startTaskIds);
         $startColumn->save();
 
-        array_splice($destinationTaskIds, $destinationRowIdx, 0, $removedTaskId);
-        $destinationColumn->task_ids = array_values($destinationTaskIds);
+        array_push($destinationTaskIds, $removedTaskId);
+        $destinationColumn->task_ids = $destinationTaskIds;
         $destinationColumn->save();
 
         $task->column_id = $destinationColumn->id;

@@ -4,6 +4,7 @@ import './App.css'
 import router from './router.jsx'
 import { AuthProvider } from './contexts/AuthProvider'
 import { ToastProvider } from './contexts/ToastProvider'
+import { DataProvider } from './contexts/DataProvider'
 
 function App() {
 
@@ -11,7 +12,9 @@ function App() {
     <>
       <ToastProvider>
         <AuthProvider>
-          <RouterProvider router={router} />
+          <DataProvider>
+            <RouterProvider router={router} />
+          </DataProvider>
         </AuthProvider>
       </ToastProvider>
     </>

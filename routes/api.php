@@ -30,8 +30,9 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::delete('/{id}', [ItemController::class, 'destroy']);
     });
 
-    Route::put('/item/switch-in', [ItemController::class, 'switchInColumn']);
-    Route::put('/item/switch-between', [ItemController::class, 'switchBetweenColumns']);
+    // Route::put('/item/switch-in', [ItemController::class, 'switchInColumn']);
+    // Route::put('/item/switch-between', [ItemController::class, 'switchBetweenColumns']);
+    Route::put('/item/basic-switch', [ItemController::class, 'basicSwitch']);
 
     Route::delete('columns/{id}', [ColumnController::class, 'destroy']);
 

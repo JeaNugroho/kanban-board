@@ -4,7 +4,8 @@ body, p {
   font-size: medium;
 }
 
-input[type='text'] {
+input[type='text'], 
+.mantine-Textarea-input {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: medium;
@@ -36,6 +37,14 @@ h1 {
   font-size: 2em;
 }
 
+h5 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: larger;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 h6 {
   font-family: 'Inter', sans-serif;
   font-weight: 500;
@@ -44,7 +53,20 @@ h6 {
   margin-bottom: 0;
 }
 
+.mantine-Modal-inner {
+  padding-left: 0;
+  padding-right: 0;
+  /* top: 5em; */
+}
 
+.mantine-TextInput-label, 
+.mantine-Textarea-label, 
+.mantine-TextInput-description,
+.mantine-Textarea-description {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: small;
+}
 
 /* #root {
   max-width: 1280px;

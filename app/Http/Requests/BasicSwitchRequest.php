@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 
-class StoreRequest extends FormRequest
+class BasicSwitchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:90',
-            'description' => 'nullable|string|max:40',
-            'content' => 'nullable|string|max:10000',
-            'column_id' => 'required|exists:columns,id'
+            'start_column_id' => 'required|exists:columns,id',
+            'destination_column_id' => 'required|exists:columns,id',
+            'task_id' => 'required|exists:items,id'
         ];
     }
 
@@ -36,7 +35,7 @@ class StoreRequest extends FormRequest
     {
         throw new HttpResponseException(
             response()->json([
-                'message' => 'Invalid store data.',
+                'message' => 'Invalid basic-switch data.',
                 'errors' => $validator->errors()
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
         );

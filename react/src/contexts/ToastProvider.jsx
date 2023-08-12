@@ -33,8 +33,8 @@ export const ToastProvider = ({ children }) => {
             <ToastContext.Provider value={{ addAlert }}>    
                 { children }
                 <div className="alerts-container">
-                    {alerts.map(alert => (
-                        <Alert key={alert.id} color={alert.color} className="toast" variant="filled">
+                    {alerts.map((alert, index) => (
+                        <Alert key={index} color={alert.color} className="toast" variant="filled">
                             <p className="message">{alert.message}</p>
                         </Alert>
                     ))}

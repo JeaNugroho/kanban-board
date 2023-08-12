@@ -1,0 +1,36 @@
+.task-card {
+    width: 100%;
+    min-height: 5.3em;
+    flex: 0 0 auto;
+}
+
+.title {
+    text-align: left;
+    margin-bottom: 0.2em;
+}
+
+/* .description-button-group {
+    height: 2.7em;
+} */
+
+.description-container {
+    color: grey;
+    text-align: left;
+
+    .description {
+        margin: 0.1em 0;
+    }
+}
+
+.item-button-bar {
+    margin-top: 0.4em;
+    display: flex;
+
+    justify-content: space-between;
+    width: 100%;
+}
+
+.item-button {
+    flex: 1;
+
+}
